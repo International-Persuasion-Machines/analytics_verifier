@@ -1,12 +1,15 @@
-// See LICENSE for usage information
+(function(global, deps, factory, root) {
+  if(typeof define==='function'&&define.amd)define(deps,factory);
+  else if(typeof module==='object'&&module.exports)module.exports=factory.apply(root,deps.map(function(_){return require(_.split(':')[0])}));
+  else root[global]=factory.apply(root,deps.map(function(_){_=_.split(':');return root[_[_.length-1]]}));
+} (
+'isAutomatedTraffic',
+function(other) {
 
-// The following lines allow the ping function to be loaded via commonjs, AMD,
-// and script tags, directly into window globals.
-// Thanks to https://github.com/umdjs/umd/blob/master/templates/returnExports.js
-(function (root, factory) { if (typeof define === 'function' && define.amd) { define([], factory); } else if (typeof module === 'object' && module.exports) { module.exports = factory(); } else { root.trackIPM = factory(); }
-}(this, function () {
-    function isAutomatedTraffic() {
-      return (window.document.documentElement.getAttribute("webdriver") || navigator.webdriver || window.callPhantom || window._phantom)
-    }
-    return isAutomatedTraffic;
-}));
+  function constructor() {
+    return (window.document.documentElement.getAttribute("webdriver") || navigator.webdriver || window.callPhantom || window._phantom)
+  }
+
+  return constructor;
+
+}, this));
